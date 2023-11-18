@@ -1,2 +1,2 @@
-# Thesis
-ELTE IK Thesis
+# TD Game Based on Thesis
+In Dev
