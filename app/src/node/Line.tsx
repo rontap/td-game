@@ -80,7 +80,7 @@ export class Line {
 
     showLineInfo(evt: jsobj) {
         const leftSpawn = DragHandlerInst.getCursor(evt)
-            .add(-90, 50);
+             .add(-90, 50);
         getState().setInspectLine(this, leftSpawn);
     }
 
@@ -112,20 +112,10 @@ export class Line {
     getSvg(tempSvgRender: number): ReactElement {
         try {
             const fromPoint = (this.fromNode.coords)
-                .add(CONST.box.width + CONST.box.padLeft, CONST.box.pointTop);
+                // .add(CONST.box.width + CONST.box.padLeft, CONST.box.pointTop);
             const toPoint = (this.toNode.coords)
-                .add(CONST.box.padLeft, CONST.box.pointTop);
-            const isLinePartOfInvalidPath = GraphUtilInst.circleElementsInGraph
-                .flat()
-                .some(line => line.ID === this.ID)
+                // .add(CONST.box.padLeft, CONST.box.pointTop);
 
-            if (isLinePartOfInvalidPath) {
-                return <path d={Geom.bezierSvgD(fromPoint, toPoint)}
-                             key={this.from + this.to + tempSvgRender + "::1"}
-                             className={`data-curve data-curve-danger data-curve-from-${this.from} data-curve-to-${this.to} `}
-                             x1={fromPoint.x} y1={fromPoint.y} x2={toPoint.x} y2={toPoint.y}
-                />
-            }
 
             return <>
                 <g className={"data-curve-group"}

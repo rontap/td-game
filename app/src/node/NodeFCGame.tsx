@@ -9,7 +9,7 @@ import {FormRoot} from "../ui/form/FormRoot";
 import {Node} from "./Node";
 import Button from "../ui/components/Button";
 
-const NodeFC = (props: { Node: Node }) => {
+const NodeFCGame = (props: { Node: Node }) => {
 
     const that: Node = props.Node;
     const noProperties = Object.values(that.configParams).length;
@@ -19,52 +19,24 @@ const NodeFC = (props: { Node: Node }) => {
     const height = 40 + (noProperties * 55) + sumAdditionalHeight;
     const tempSvgRender = State((state) => state.forceSvgRender)
     const a = that.nodeConfigTypes;
-    return (<foreignObject key={that.ID + "::nodeFC"}
-
+    return (<foreignObject key={that.ID + "::nodeFCGame"}
                            onClick={() => getState().setActiveNode(that.ID)}
-                           className={`fo void data-node-${that.ID} ${that.nodeProps.className}`}
+                           className={`fog void data-node-${that.ID} ${that.nodeProps.className}`}
                            data-id={that.ID}
-                           x={ that.coords.x}
-                           y={ that.coords.y}
+                           x={that.coords.x}
+                           y={that.coords.y}
+                           data-immovable={true}
                            width={CONST.box.width + CONST.box.padLeft * 2} height={height}>
         {/*@ts-ignore*/}
         <div className={"boxedItem"} xmlns="http://www.w3.org/1999/xhtml">
             <ErrorBoundary FallbackComponent={NodeError}>
-                <div className={"title"}>
-                    {that.nodeType} [{that.ID}]
-
-                    <FontAwesomeIcon icon={faCode} className={"showCodeToggle"}/>
-                    <code
-                        style={{maxHeight: height + 'px'}}
-                        className={`boxedCode boxedCode-${that.ID}`}>
-                    </code>
-                </div>
-
-                {
-                    that.nodeProps.inputs !== false && (
-                        <button className={"nodeConnection nodeConnectionStart"}
-                                onClick={preventBubble(() => MovableState.finishLineAdd(that))}></button>
-                    )
-                }
-
-                {
-                    that.nodeProps.outputs !== false && (
-                        <button className={"nodeConnection nodeConnectionEnd"}
-                                onClick={preventBubble(() => MovableState.beginLineAdd(that))}></button>
-                    )
-                }
-
-                <div className={"configCtn"}>
-                    <FormRoot
-                        configValues={that.configValues}
-                        configParams={that.configParams}/>
-                </div>
+                Hello there
             </ErrorBoundary>
         </div>
     </foreignObject>);
 }
 
-export default NodeFC;
+export default NodeFCGame;
 
 const NodeError = ({resetErrorBoundary}: any) => <div className={"p-5"}>
     This node could not be loaded.<br/>

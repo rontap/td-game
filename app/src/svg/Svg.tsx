@@ -24,7 +24,7 @@ export default function Svg(props: jsobj) {
         >
             <svg
                 {...Draggable}
-                {...(blueprint ? CONST.blueprintRectSize : CONST.rectSizeHW)}
+                {...(blueprint === "Blueprint" ? CONST.blueprintRectSize : CONST.rectSizeHW)}
                 className={"svgRoot"}
                 xmlns="http://www.w3.org/2000/svg"
             >
@@ -66,7 +66,7 @@ export default function Svg(props: jsobj) {
                 <SvgLines/>
 
                 {
-                    nodes.map((node: Node) => node.getSvg())
+                    nodes.map((node: Node) => node.getSvg(blueprint))
                 }
 
                 <InspectLine/>

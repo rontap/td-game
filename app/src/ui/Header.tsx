@@ -10,10 +10,11 @@ import PositionInst from "../svg/Positioning";
 // @ts-ignore
 import {SerialiserInst} from "../graph/Serialiser";
 import GPT4 from "./GPT4";
+import {GraphState} from "../App";
 
 
 export default function Header({toggleBg, graph,toggleMin}: {
-    toggleBg: Function, graph: boolean,toggleMin:Function
+    toggleBg: Function, graph: GraphState,toggleMin:Function
 
 }) {
     const {

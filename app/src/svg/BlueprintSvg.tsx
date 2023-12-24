@@ -39,7 +39,7 @@ export default function BlueprintSvg(props: jsobj) {
 
         {everyNode
             .find(node => node.nodeType === blueprinted)
-            ?.getSvg(true)
+            ?.getSvg("Blueprint")
         }
     </svg>
 

@@ -20,12 +20,13 @@ import BlueprintSvg from "./svg/BlueprintSvg";
 import NodeBlueprintConfigEditor from "./node/NodeBlueprintConfigEditor";
 import Taskbar from "./ui/Taskbar";
 
+export type GraphState = "Blueprint" | "Plan" | "Play"
 
 function App() {
     const ng = State((state) => state.nodeGroup)
-    const items: Map<string, jsobj> = NodeBuilder.Rebuild();
+    const items: Map<string, jsobj> = NodeBuilder.Build(true);
 
-    const [graph, setGraph] = useState(true);
+    const [playState, setPlayState] = useState<GraphState>("Play");
 
     const [light, setLight] = useState(localStorage.getItem("graphene_theme") === "1");
     const [min, setMin] = useState(false);
@@ -39,30 +40,34 @@ function App() {
     return (
         <div className={`App ${light ? "_white" : ""} ${min ? "_min" : ""}`}>
             <nav>
-                <span id={"titlemark"}>GRAPHENE</span>
+                <span id={"titlemark"}>HEXAGRAMMATRON</span>
                 <Button
                     className={"blue"}
-                    disabled={!graph}
-                    onClick={() => setGraph(false)}>Group</Button>
+                    disabled={playState === "Blueprint"}
+                    onClick={() => setPlayState("Blueprint")}>Blueprint</Button>
                 <Button
-                    disabled={graph}
                     className={"blue"}
-                    onClick={() => setGraph(true)}>Graph</Button>
+                    disabled={playState === "Plan"}
+                    onClick={() => setPlayState("Plan")}>Plan</Button>
+                <Button
+                    disabled={playState === "Play"}
+                    className={"blue"}
+                    onClick={() => setPlayState("Play")}>Play</Button>
                 <Header toggleBg={toggleBg}
                         toggleMin={toggleMin}
-                        graph={graph}/>
-                <a id={"vers"}
-                   target={"_blank"}
-                   href={"https://github.com/rontap/thesis"}
-                   title={"Github Source"}
-                >1.0 Thesis release</a>
+                        graph={playState}/>
+                {/*<a id={"vers"}*/}
+                {/*   target={"_blank"}*/}
+                {/*   href={"https://github.com/rontap/thesis"}*/}
+                {/*   title={"Github Source"}*/}
+                {/*>1.0 Thesis release</a>*/}
 
             </nav>
 
-            {graph ? <>
+            {playState !== "Blueprint" ? <>
                     <ContextMenu items={items}/>
                     <ZoomInfo/>
-                    <Svg items={items}/>
+                    <Svg items={items} blueprint={playState}/>
                     <Taskbar items={items}/>
                 </>
                 : <>

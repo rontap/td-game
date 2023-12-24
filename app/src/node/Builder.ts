@@ -16,16 +16,15 @@ export class NodeBuilder {
     private static _types = new Map<string, NodeTemplate>();
 
     static InstNodesFromTemplate() {
-        NodeBuilder.Rebuild();
+        NodeBuilder.Build(true);
         return [...this._types.values()].map(value => new Node(value.name));
     }
 
-    static Rebuild() {
-        this._types = new Map();
-        return this.Build();
-    }
 
-    static Build() {
+    static Build(shouldRebuild: boolean = false) {
+        if (shouldRebuild) {
+            this._types = new Map();
+        }
         this._rawTypes = loadJsonNodeDefinitions();
 
         [...this._rawTypes.values()].map((value: NodeTemplate) => {

@@ -133,6 +133,7 @@ export default function GPT4(props: jsobj) {
         setPromptContent(content => (content + "%GRAPH%"))
     }
 
+    return <></>
     return <>
         {graph && <>
             {" "}

@@ -19,7 +19,7 @@ class DragHandler {
     public selected: EventTarget | null = null;
 
     static bubbleEvt(target: any, movableElements: string[]): any {
-        if (movableElements.includes(target.tagName)) {
+        if (movableElements.includes(target.tagName) && !target.getAttribute("data-immovable")) {
             return target;
         } else {
             return DragHandler.bubbleEvt(target.parentElement, movableElements);

@@ -30,7 +30,7 @@ it('Renders <BlueprintSVG/> without issues', () => {
     getState().resetStore();
     CONST.dndBypass = false;
     buildAllNodes();
-    const appCore = renderer.create(<BlueprintSvg items={NodeBuilder.Rebuild()} blueprint/>)
+    const appCore = renderer.create(<BlueprintSvg items={NodeBuilder.Build(true)} blueprint/>)
 
     expect(appCore).toMatchSnapshot();
 })

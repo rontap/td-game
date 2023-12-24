@@ -7,6 +7,8 @@ import {jsobj} from "../util/util";
 import {configTypes, NodeEdgeRef} from "../app/EdgeLoader";
 import {NodeSerialised, NodeSerialisedSureProperties, NodeTemplate, NodeTemplateConfig} from "../app/NodeGroupLoader";
 import NodeFC from "./NodeFC";
+import NodeFCGame from "./NodeFCGame";
+import {GraphState} from "../App";
 
 export type NodeId = number;
 
@@ -164,9 +166,13 @@ export class Node {
             .map((line: Line) => line.to);
     }
 
-    getSvg(blueprint: boolean = false) {
-        return <NodeFC Node={this}
-                       blueprint={blueprint}
+    getSvg(blueprint: GraphState) {
+        if (blueprint === "Play") {
+            return <NodeFCGame Node={this}
+                    key={this.ID + "::nodeFC"}
+            />
+        }
+        else return <NodeFC Node={this}
                        key={this.ID + "::nodeFC"}
         />
     }
