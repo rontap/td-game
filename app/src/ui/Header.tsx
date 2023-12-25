@@ -40,10 +40,9 @@ export default function Header({toggleBg, graph,toggleMin}: {
                 <Button onClick={() => undoWrap()}>Undo</Button>
                 <Button onClick={() => redoWrap()}>Redo</Button>
             </BtnGroup>
-            <Button onClick={() => PositionInst.orderNodes()}>
-                Auto Layout
-            </Button>
-
+            {/*<Button onClick={() => PositionInst.orderNodes()}>*/}
+            {/*    Auto Layout*/}
+            {/*</Button>*/}
             {" "}
 
         </>}

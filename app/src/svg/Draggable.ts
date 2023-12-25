@@ -19,7 +19,10 @@ class DragHandler {
     public selected: EventTarget | null = null;
 
     static bubbleEvt(target: any, movableElements: string[]): any {
-        if (movableElements.includes(target.tagName) && !target.getAttribute("data-immovable")) {
+        if (target.getAttribute("data-immovable")) {
+            return false;
+        }
+        if (movableElements.includes(target.tagName)) {
             return target;
         } else {
             return DragHandler.bubbleEvt(target.parentElement, movableElements);
@@ -52,6 +55,11 @@ class DragHandler {
 
         if (evt.target.tagName !== 'svg') {
             evt.stopPropagation();
+        }
+
+        console.log(evt.target)
+        if (!evt.target) {
+            return false;
         }
 
         const actTarget = (evt.target || this.selected) as HTMLElement;
@@ -96,10 +104,12 @@ class DragHandler {
     private moveNodeSvg(id: number, finalCoord: Point) {
         document.querySelectorAll('.data-curve-from-' + id).forEach(item => {
             const toParameter = DragHandler.getCoords(item, 'x2', 'y2');
-            const bezier = Geom.bezierSvgD(finalCoord.add(CONST.box.width + CONST.box.padLeft, CONST.box.pointTop), toParameter)
+            // const bezier = Geom.bezierSvgD(finalCoord.add(CONST.box.width + CONST.box.padLeft, CONST.box.pointTop), toParameter)
+            const bezier = Geom.bezierSvgD(finalCoord.add(30, 30), toParameter)
             item.setAttributeNS(null, 'd', bezier)
             item.setAttributeNS(null, 'path', bezier)
-            this.setCoords(item, finalCoord.add(CONST.box.width + CONST.box.padLeft, CONST.box.pointTop), 'x1', 'y1');
+            // this.setCoords(item, finalCoord.add(CONST.box.width + CONST.box.padLeft, CONST.box.pointTop), 'x1', 'y1');
+            this.setCoords(item, finalCoord.add(30, 30), 'x1', 'y1');
         })
 
         document.querySelectorAll('.data-curve-to-' + id).forEach(item => {

@@ -16,17 +16,18 @@ const NodeFCGame = (props: { Node: Node }) => {
     const sumAdditionalHeight = Object.values(that.configParams).reduce(
         (prev: any, param: any) => (param?.additionalProps?.height || 0) + prev, 0
     )
-    const height = 40 + (noProperties * 55) + sumAdditionalHeight;
+    const height = 60;
+    const width = 60;
     const tempSvgRender = State((state) => state.forceSvgRender)
     const a = that.nodeConfigTypes;
     return (<foreignObject key={that.ID + "::nodeFCGame"}
                            onClick={() => getState().setActiveNode(that.ID)}
-                           className={`fog void data-node-${that.ID} ${that.nodeProps.className}`}
+                           className={`fo fog void data-node-${that.ID} ${that.nodeProps.className}`}
                            data-id={that.ID}
                            x={that.coords.x}
                            y={that.coords.y}
                            data-immovable={true}
-                           width={CONST.box.width + CONST.box.padLeft * 2} height={height}>
+                           width={width} height={height}>
         {/*@ts-ignore*/}
         <div className={"boxedItem"} xmlns="http://www.w3.org/1999/xhtml">
             <ErrorBoundary FallbackComponent={NodeError}>

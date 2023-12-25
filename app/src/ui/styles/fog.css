@@ -1,0 +1,12 @@
+.fog .boxedItem {
+    border: 3px solid #ccc;
+    border-radius: 100%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    top: 0;
+}
+
+.fog > div {
+    background: #263136;
+}

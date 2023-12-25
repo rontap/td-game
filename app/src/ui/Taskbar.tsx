@@ -35,8 +35,8 @@ export default function Taskbar({items}: { items: Map<string, jsobj> }) {
             <DndContext>
                 <WrapToTaskbarItem name="nodes" cid="nodes" element={<AvailableNodes items={items}/>}/>
                 {/*<WrapToTaskbarItem name="active" cid="activeNodes" element={<ActiveNodes/>}/>*/}
-                <WrapToTaskbarItem name="props" cid="properties" element={<PropertyViewer/>}/>
-                <WrapToTaskbarItem name="io" cid="io" element={<IO/>}/>
+                <WrapToTaskbarItem name="props" cid="properties" element={<PropertyViewer/>}  defaultMinimised={true}/>
+                <WrapToTaskbarItem name="io" cid="io" element={<IO/>} defaultMinimised={true}/>
                 <Droppable/>
                 {/*<Draggable/>*/}
             </DndContext>
@@ -61,10 +61,11 @@ function WrapToTaskbarItem({
                                cid,
                                name,
                                element,
-                               title
-                           }: { title?: string, name: string, cid: string, element: ReactElement }) {
+                               title,
+                               defaultMinimised
+                           }: { title?: string, name: string, cid: string, defaultMinimised?: boolean, element: ReactElement }) {
     const [stateTransform, setStateTransform] = useState({x: 0, y: 0});
-    const [minimised, setMinimised] = useState(false);
+    const [minimised, setMinimised] = useState(defaultMinimised ?? false);
     const {isDragging, attributes, listeners, setNodeRef, transform} = useDraggable({
         id: cid,
     });

@@ -80,7 +80,7 @@ export class Line {
 
     showLineInfo(evt: jsobj) {
         const leftSpawn = DragHandlerInst.getCursor(evt)
-             .add(-90, 50);
+            .add(-90, 50);
         getState().setInspectLine(this, leftSpawn);
     }
 
@@ -112,9 +112,9 @@ export class Line {
     getSvg(tempSvgRender: number): ReactElement {
         try {
             const fromPoint = (this.fromNode.coords)
-                // .add(CONST.box.width + CONST.box.padLeft, CONST.box.pointTop);
+                .add(60 / 2, 60 / 2);
             const toPoint = (this.toNode.coords)
-                // .add(CONST.box.padLeft, CONST.box.pointTop);
+                .add(60 / 2, 60 / 2);
 
 
             return <>

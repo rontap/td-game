@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 //---------------------
 import './ui/styles/App.css';
 import './ui/styles/svg.css';
+import './ui/styles/fog.css';
 import './ui/styles/Stem.css';
 import './ui/styles/ctxmenu.css';
 import './ui/styles/mat.css';
@@ -40,7 +41,7 @@ function App() {
     return (
         <div className={`App ${light ? "_white" : ""} ${min ? "_min" : ""}`}>
             <nav>
-                <span id={"titlemark"}>HEXAGRAMMATRON</span>
+                <span id={"titlemark"}>OCTA<br/>GRAMMA<br/>TON</span>
                 <Button
                     className={"blue"}
                     disabled={playState === "Blueprint"}
