@@ -20,6 +20,10 @@
       "type": "string",
       "color": "blue"
     },
+    "team": {
+      "type": "string",
+      "color": "red"
+    },
     "rect": {
       "type": "drawable"
     },
@@ -42,6 +46,9 @@
     "time_ms": {
       "type": "number",
       "_widget": "time"
+    },
+    "team": {
+      "type": "string"
     }
   }
 }

@@ -7,6 +7,8 @@ import {Node} from "../node/Node";
 import Movable from "./Movable";
 import SvgLines from "./SvgLines";
 import InspectLine from "./InspectLine";
+import {ResourceRoute} from "../game/gameSlice";
+import SimpleLineBetweenNodes from "./SimpleLineBetweenNodes";
 
 export default function Svg(props: jsobj) {
     const {blueprint} = props;
@@ -14,9 +16,10 @@ export default function Svg(props: jsobj) {
         DragHandlerInst.getTransformMatrix();
     }, []);
 
-    let nodes;
+    let nodes, routes;
 
     nodes = State((state) => state.nodes)
+    routes = State(state => state.routes)
 
     return (
         <div id={"svgRootCont"}
@@ -68,6 +71,21 @@ export default function Svg(props: jsobj) {
                 {
                     nodes.map((node: Node) => node.getSvg(blueprint))
                 }
+                <defs>
+                    <marker
+                        id="arrow"
+                        viewBox="0 0 10 10"
+                        refX="5"
+                        refY="5"
+                        markerWidth="15"
+                        markerHeight="15"
+                        fill="red"
+                        orient="auto-start-reverse">
+                        <path d="M 0 0 L 10 5 L 0 10 z"/>
+                    </marker>
+                </defs>
+                {routes.map((route: ResourceRoute, i: number) => <SimpleLineBetweenNodes key={"route::" + i}
+                                                                                         route={route}/>)}
 
                 <InspectLine/>
             </svg>

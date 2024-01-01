@@ -9,7 +9,7 @@ import CONST from "../const";
 
 const taskbarStyles = {
     nodes: {
-        width: '350px',
+        width: '280px',
         height: '240px'
     },
     properties: {

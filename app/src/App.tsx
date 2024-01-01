@@ -39,7 +39,7 @@ function App() {
     }
 
     return (
-        <div className={`App ${light ? "_white" : ""} ${min ? "_min" : ""}`}>
+        <div className={`App ${light ? "_white" : ""} ${min ? "_min" : ""} show-${playState}`}>
             <nav>
                 <span id={"titlemark"}>OCTA<br/>GRAMMA<br/>TON</span>
                 <Button

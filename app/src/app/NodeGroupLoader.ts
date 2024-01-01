@@ -59,7 +59,7 @@ export type NodeTemplateMapGroup = Map<string, NodeTemplateMap>;
 
 class NodeGroup {
     static default: string = CONST.defaultNodeGroup;
-    static activeNodeGroup: string = "nodes-elteikth";
+    static activeNodeGroup: string = "nodes-game";
     static loadDebugNodes: boolean = false;
     static gptItems: Map<string, string> = new Map();
     static #nodeGroupDefinitions: NodeTemplateMapGroup | null = null;

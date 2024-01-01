@@ -7,18 +7,19 @@ import {shallow} from "zustand/shallow";
 import {GraphUtilInst} from "./GraphUtil";
 import {Point} from "../util/Geom";
 import {NodeGroup} from "../app/NodeGroupLoader";
+import {ResourceRoute, gameState, GameState, initialGameState} from '../game/gameSlice';
 
-interface AppState {
+type AppState = {
     nodes: Node[],
     lines: Line[],
     addNode: (node: Node) => void
     getNodeById: (id: number) => Node | undefined
+    getNodeByIds: (ids: number[]) => (Node | undefined)[]
     removeNode: (id: number) => void,
     addLine: (line: Line) => boolean,
     removeLine: (id: number) => void,
     inspectedLine: { line: Line, point: Point } | undefined,
     nodeGroup: string,
-
     resetStore: () => void,
     blueprintedNode: string,
     getLineBetween: (from: number, to: number) => Line | undefined
@@ -34,11 +35,10 @@ interface AppState {
     removeInspectLine: () => void,
     forceSvgRender: number,
     doSvgRender: () => void,
-
-
     setSingleEdgeOfActiveNode:
         (propertyName: string, to: string) => void,
-}
+    ///
+} & GameState;
 
 export enum End { FROM, TO}
 
@@ -52,7 +52,8 @@ const initialState = {
     forceSvgRender: 0,
     nodes: [],
     zoom: 1,
-    inspectedLine: undefined
+    inspectedLine: undefined,
+    ...initialGameState
 }
 
 const resetIDS = () => {
@@ -78,6 +79,8 @@ const State = create<AppState>()(
                 },
                 getNodeById: (id: NodeId) =>
                     get().nodes.find(item => item.ID === Number(id)),
+                getNodeByIds: (ids: NodeId[]) =>
+                    ids.map(id => get().nodes.find(item => item.ID === Number(id))),
                 removeNode: (id: NodeId) => {
                     set((state) => ({nodes: state.nodes.filter(item => item.ID !== Number(id))}))
                     handleLineSideEffect();
@@ -123,7 +126,33 @@ const State = create<AppState>()(
                     ({inspectedLine: {line, point}})),
                 removeInspectLine: () => set(() =>
                     ({inspectedLine: undefined})),
-
+                setDragSelection: (item: ResourceRoute) => {
+                    return set(state => ({
+                        dragSelection: {
+                            ...state.dragSelection,
+                            ...item
+                        }
+                    }))
+                },
+                removeDragSelection: () => {
+                    return set(() => ({dragSelection: null}))
+                },
+                toggleRoute: (newRoute: ResourceRoute) => {
+                    const existingRoute = get().getRouteIndexBetween(newRoute.fromNode || -1, newRoute.toNode || -1)
+                    if (existingRoute >= 0) {
+                        return set(state => ({
+                            routes: state.routes.slice(existingRoute + 1)
+                        }))
+                    }
+                    return set(state => ({
+                        routes: state.routes.concat(newRoute)
+                    }))
+                },
+                getRouteBetween: (from: NodeId, to: NodeId) =>
+                    get().routes.find(line => line.fromNode === from && line.toNode === to),
+                getRouteIndexBetween: (from: NodeId, to: NodeId) =>
+                    get().routes.findIndex(line => line.fromNode === from && line.toNode === to),
+                ...initialGameState,
                 // store part
                 ...initialState
             }),

@@ -108,8 +108,8 @@ svg:has(.currentNodeActive) .nodeConnectionEnd {
 }
 
 .configInputItem, .configButtonItem {
-    margin: 5px;
-    padding: 4px;
+    margin: 4px;
+    padding: 3px;
     background: linear-gradient(#ffffff66, #b7b7b766); /*looks bit ugly*/
     border: 1px solid #333;
     border-radius: 6px;
@@ -142,6 +142,30 @@ textarea.configInputItem {
     min-width: 30px;
     padding: 2px;
     margin-bottom: 2px;
+}
+
+.configEnumContainer {
+    margin: 2px 6px 0 6px;
+}
+
+.configEnumContainer .configButtonItem {
+    margin: 0px 0;
+    min-width: 30px;
+    border-radius: 0;
+}
+
+.configEnumContainer .configButtonItem.active {
+    background: linear-gradient(#b7b7b744, #ffffff44);
+    color: white;
+
+}
+
+.configEnumContainer .configButtonItem:first-child {
+    border-radius: 4px 0 0 4px;
+}
+
+.configEnumContainer .configButtonItem:last-child {
+    border-radius: 0 4px 4px 0;
 }
 
 .edgeRef {
@@ -285,16 +309,18 @@ foreignObject:hover .showCodeToggle {
     max-height: 1000px;
     height: calc(100% - 160px);
 }
+
 .data-curve-danger {
-    fill:transparent;
-    stroke:#f44336;
-    stroke-width:3px;
-}
-.data-curve-circle {
-    fill:#90caf9;
+    fill: transparent;
+    stroke: #f44336;
+    stroke-width: 3px;
 }
 
-    /************************************************/
+.data-curve-circle {
+    fill: #90caf9;
+}
+
+/************************************************/
 /************************************************/
 /************************************************/
 /************************************************/
@@ -330,23 +356,23 @@ COLORED ITEM
     margin-bottom: 3px;
 }
 
-.orange .boxedItem .title , .CP.orange{
+.orange .boxedItem .title, .CP.orange {
     background: #ff693e;
 }
 
-.blue .boxedItem .title , .CP.blue{
+.blue .boxedItem .title, .CP.blue {
     background: #4488FF;
 }
 
-.red .boxedItem .title , .CP.red{
+.red .boxedItem .title, .CP.red {
     background: #e91e63;
 }
 
-.green .boxedItem .title , .CP.green{
+.green .boxedItem .title, .CP.green {
     background: #4caf50;
 }
 
-.purple .boxedItem .title , .CP.purple{
+.purple .boxedItem .title, .CP.purple {
     background: #9c27b0;
 }
 
@@ -357,22 +383,22 @@ COLORED ITEM
     background: #4caf50;
 }
 
-._min  foreignObject.purple > div,
+._min foreignObject.purple > div,
 ._white foreignObject.purple > div {
     background: #9c27b0;
 }
 
-._min  foreignObject.blue > div,
+._min foreignObject.blue > div,
 ._white foreignObject.blue > div {
     background: #4488FF;
 }
 
-._min  foreignObject.red > div,
+._min foreignObject.red > div,
 ._white foreignObject.red > div {
     background: #e91e63;
 }
 
-._min  foreignObject.orange > div,
+._min foreignObject.orange > div,
 ._white foreignObject.orange > div {
     background: #ff693e;
 }
@@ -431,4 +457,12 @@ COLORED ITEM
 
 ._white foreignObject:active {
     outline: 2px solid #666;
+}
+
+body .only-Play {
+    display: none;
+}
+
+.App.show-Play .only-Play {
+    display: block;
 }

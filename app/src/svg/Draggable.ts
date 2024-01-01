@@ -57,7 +57,6 @@ class DragHandler {
             evt.stopPropagation();
         }
 
-        console.log(evt.target)
         if (!evt.target) {
             return false;
         }

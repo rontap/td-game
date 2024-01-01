@@ -4,6 +4,7 @@ import Checkbox from "./Checkbox";
 import Restricted from "./Restricted";
 import Textarea from "./Textarea";
 import _JSON from "./JSON";
+import Enum from "./Enum";
 
 const Atoms = {
     String,
@@ -11,7 +12,8 @@ const Atoms = {
     Checkbox,
     Textarea,
     JSON: _JSON,
-    Restricted
+    Restricted,
+    Enum
 }
 
 export default Atoms

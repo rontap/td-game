@@ -73,6 +73,8 @@ export default function FormRouter(props: FormRouteComponentProps) {
             return <Atoms.Checkbox {...passProps}/>
         case FormAtoms.BINARY:
             return <Atoms.Restricted {...passProps}/>
+        case FormAtoms.ENUM:
+            return <Atoms.Enum {...passProps}/>
         case FormAtoms.STATIC:
             return <>Static value.</>
         default:

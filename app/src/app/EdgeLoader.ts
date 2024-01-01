@@ -28,7 +28,8 @@ export enum FormAtoms {
     BINARY = "binary",
     STATIC = "static",
     TEXT = "text",
-    TEXT_AREA = "textarea"
+    TEXT_AREA = "textarea",
+    ENUM = "enum"
 }
 
 export const IsFormAtom = (value: string) => {
